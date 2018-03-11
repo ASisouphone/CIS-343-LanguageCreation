@@ -13,7 +13,7 @@ Creates a point at a specific location.
 ```
 **circle  x  y  r;**
 ```
-Creates cricle at a point;
+Creates a circle at a point;
 ```
 **rectangle  x  y  w  h;**
 ```
@@ -25,5 +25,5 @@ Sets the color for the current drawing based on RGB values.
 ```
 **END**
 ```
-Waits 5 seconds and then exists the program.
+Waits 5 seconds and then exits the program.
 ```
