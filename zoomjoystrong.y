@@ -1,6 +1,6 @@
 %{
 	#include <stdio.h>
-  #include "zoomjoystrong.h"
+    #include "zoomjoystrong.h"
 
 	/** Throws errors **/
 	void yyerror(const char* msg);
@@ -9,7 +9,7 @@
 	int yylex();
 
 	/** The number of statements parsed **/
-  int num_statements = 0;
+    int num_statements = 0;
 %}
 
 %error-verbose
@@ -38,8 +38,8 @@
 %%
 statement_list: statement
   | statement statement_list
-	| END
-	{ printf("Exiting program..."); finish(); return 0;}
+  | END
+	{ printf("Exiting program..."); finish(); return 0; }
 ;
 
 statement: line END_STATEMENT
