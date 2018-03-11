@@ -96,8 +96,14 @@
 
 	#include <stdio.h>
   #include "zoomjoystrong.h"
+
+	/** Throws errors **/
 	void yyerror(const char* msg);
+
+	/** Generates tokens **/
 	int yylex();
+
+	/** The number of statements parsed **/
   int num_statements = 0;
 
 
@@ -121,10 +127,10 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 12 "zoomjoystrong.y"
+#line 18 "zoomjoystrong.y"
 { int i; char* str; float f;}
 /* Line 193 of yacc.c.  */
-#line 128 "zoomjoystrong.tab.c"
+#line 134 "zoomjoystrong.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -137,7 +143,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 141 "zoomjoystrong.tab.c"
+#line 147 "zoomjoystrong.tab.c"
 
 #ifdef short
 # undef short
@@ -425,8 +431,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    34,    34,    35,    36,    39,    40,    41,    42,    43,
-      46,    51,    56,    61,    66
+       0,    39,    39,    40,    41,    45,    46,    47,    48,    49,
+      52,    66,    80,    95,   109
 };
 #endif
 
@@ -1342,39 +1348,91 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 10:
-#line 47 "zoomjoystrong.y"
-    { printf("%s %d %d %d %d\n", (yyvsp[(1) - (5)].str), (yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i)); num_statements++;
-      line((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i)); ;}
+        case 4:
+#line 42 "zoomjoystrong.y"
+    { printf("Exiting program..."); finish(); return 0;;}
+    break;
+
+  case 10:
+#line 53 "zoomjoystrong.y"
+    {
+			printf("%s %d %d %d %d\n", (yyvsp[(1) - (5)].str), (yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i));
+			num_statements++;
+			// Check points are within screen bounds
+			if ((yyvsp[(2) - (5)].i) < WIDTH && (yyvsp[(3) - (5)].i) < HEIGHT && (yyvsp[(4) - (5)].i) < WIDTH && (yyvsp[(5) - (5)].i) < HEIGHT) {
+					line((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i));
+					printf("Line drawn\n");
+			} else {
+					printf("The parameters are not within %d and %d\n", HEIGHT, WIDTH);
+			}
+		;}
     break;
 
   case 11:
-#line 52 "zoomjoystrong.y"
-    { printf("%s %d %d\n", (yyvsp[(1) - (3)].str), (yyvsp[(2) - (3)].i), (yyvsp[(3) - (3)].i)); num_statements++;
-      point ((yyvsp[(2) - (3)].i), (yyvsp[(3) - (3)].i)); ;}
+#line 67 "zoomjoystrong.y"
+    {
+			printf("%s %d %d\n", (yyvsp[(1) - (3)].str), (yyvsp[(2) - (3)].i), (yyvsp[(3) - (3)].i));
+			num_statements++;
+			// Check points are within screen bounds
+			if ((yyvsp[(2) - (3)].i) < WIDTH && (yyvsp[(3) - (3)].i) < HEIGHT) {
+					point((yyvsp[(2) - (3)].i), (yyvsp[(3) - (3)].i));
+					printf("Point drawn\n");
+			} else {
+					printf("The parameters are not within %d and %d\n", HEIGHT, WIDTH);
+			}
+		;}
     break;
 
   case 12:
-#line 57 "zoomjoystrong.y"
-    { printf("%s %d %d %d\n", (yyvsp[(1) - (4)].str), (yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i)); num_statements++;
-      circle((yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i)); ;}
+#line 81 "zoomjoystrong.y"
+    {
+			printf("%s %d %d %d\n", (yyvsp[(1) - (4)].str), (yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i));
+			num_statements++;
+			// Check points are within screen bounds
+			if ((yyvsp[(2) - (4)].i) < WIDTH && (yyvsp[(3) - (4)].i) < HEIGHT) {
+					circle ((yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i));
+					printf("Circle drawn\n");
+			} else {
+					printf("The parameters are not within %d and %d\n", HEIGHT, WIDTH);
+			}
+
+    ;}
     break;
 
   case 13:
-#line 62 "zoomjoystrong.y"
-    { printf("%s %d %d %d %d\n", (yyvsp[(1) - (5)].str), (yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i)); num_statements++;
-      rectangle((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i)); ;}
+#line 96 "zoomjoystrong.y"
+    {
+			printf("%s %d %d %d %d\n", (yyvsp[(1) - (5)].str), (yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i));
+			num_statements++;
+			// Check points are within screen bounds
+			if ((yyvsp[(2) - (5)].i) < WIDTH && (yyvsp[(3) - (5)].i) < HEIGHT) {
+					rectangle((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i), (yyvsp[(5) - (5)].i));
+					printf("Rectangle drawn\n");
+			} else {
+					printf("The parameters are not within %d and %d\n", HEIGHT, WIDTH);
+			}
+		;}
     break;
 
   case 14:
-#line 67 "zoomjoystrong.y"
-    { printf("%s %d %d %d\n", (yyvsp[(1) - (4)].str), (yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i)); num_statements++;
-      set_color((yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i)); ;}
+#line 110 "zoomjoystrong.y"
+    {
+			printf("%s %d %d %d\n", (yyvsp[(1) - (4)].str), (yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i));
+			num_statements++;
+			// Check values are within RGB bounds
+			if ((yyvsp[(2) - (4)].i) >= 0 && (yyvsp[(3) - (4)].i) >= 0 && (yyvsp[(4) - (4)].i) >= 0 && (yyvsp[(2) - (4)].i) <= 255 && (yyvsp[(3) - (4)].i) <= 255 && (yyvsp[(4) - (4)].i) <= 255) {
+					set_color((yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i), (yyvsp[(4) - (4)].i));
+					printf("Color set\n");
+			} else {
+					printf("The parameters are not within RGB range of 0 and 255\n");
+			}
+
+		;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1378 "zoomjoystrong.tab.c"
+#line 1436 "zoomjoystrong.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1588,15 +1646,41 @@ yyreturn:
 }
 
 
-#line 75 "zoomjoystrong.y"
+#line 124 "zoomjoystrong.y"
 
+/**
+ * Prints out the instructions for the program.
+ */
+void startUpDialog() {
+	printf("Valid Commands:\n");
+	printf("line x y u v;\n");
+	printf("point x y;\n");
+	printf("circle x y r;\n");
+	printf("rectangle x y w h;\n");
+	printf("set_color r g b;\n");
+	printf("Type: 'END' to end the program\n\n");
+}
+
+/**
+ * Sets up the program.
+ *
+ * argc The number of arguments
+ * argv Vector of arguments
+ */
 int main(int argc, char** argv){
-	printf("\n==========\n");
+	printf("\n===========[START]===========\n");
+	startUpDialog();
 	setup();
 	yyparse();
-  printf("\n\n==========\nFound %d statements.\n\n", num_statements);
+  printf("\n\n===========[END]===========\nFound %d statements.\n\n", num_statements);
 	return 0;
 }
+
+/**
+ * Prints out an error if an invalid input is detected.
+ *
+ * msg The error message thrown
+ */
 void yyerror(const char* msg){
 	fprintf(stderr, "ERROR! %s\n", msg);
 }
